@@ -1,6 +1,5 @@
 package com.kobalt.kobalt.job.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import com.kobalt.kobalt.job.JobService;
 
 @Service
 public class JobServiceImplementation implements JobService {
-    // private List<Job> jobs = new ArrayList<>();
     JobRepository jobRepository;
 
     public JobServiceImplementation(JobRepository jobRepository) {
