@@ -44,7 +44,6 @@ public class CompaniesServiceImplementation implements CompaniesService {
                     company.getLocations() != null ? company.getLocations() : companyUpdated.getLocations());
             companyUpdated.setDescription(
                     company.getDescription() != null ? company.getDescription() : companyUpdated.getDescription());
-            companyUpdated.setJobs(company.getJobs().size() != 0 ? company.getJobs() : companyUpdated.getJobs());
             this.companiesRepository.save(companyUpdated);
             return true;
         }

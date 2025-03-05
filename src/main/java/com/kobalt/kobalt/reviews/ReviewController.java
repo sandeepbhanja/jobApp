@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
-@RequestMapping("/companies")
+@RequestMapping("/companies/{companyId}")
 public class ReviewController {
 
     ReviewService rs;
@@ -24,38 +24,38 @@ public class ReviewController {
         this.rs = revser;
     }
 
-    @GetMapping("/{company}/reviews")
-    public ResponseEntity<List<Reviews>> getReviewsOfCompany(@PathVariable String company) {
-        return new ResponseEntity<>(this.rs.getAllReviews(company),HttpStatus.OK);
+    @GetMapping("/reviews")
+    public ResponseEntity<List<Reviews>> getReviewsOfCompany(@PathVariable Long companyId) {
+        return new ResponseEntity<>(this.rs.getAllReviews(companyId),HttpStatus.OK);
     }
 
-    @PostMapping("/{company}/reviews")
-    public ResponseEntity<String> AddReviewsOfCompany(@PathVariable String company , @RequestBody Reviews review) {
-        boolean isSuccess = this.rs.addReviews(review,company);
+    @PostMapping("/reviews")
+    public ResponseEntity<String> AddReviewsOfCompany(@PathVariable Long companyId , @RequestBody Reviews review) {
+        boolean isSuccess = this.rs.addReviews(review,companyId);
         if(isSuccess){
             return new ResponseEntity<>("Review Added",HttpStatus.OK);
         }
         return new ResponseEntity<>("Error while adding reviews",HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
-    @PutMapping("/{company}/reviews/{id}")
-    public ResponseEntity<String> updateReviewbyId(@PathVariable Long id, @RequestBody Reviews Review,@PathVariable String company) {
-        boolean isUpdated = this.rs.updateReview(Review, id, company);
+    @PutMapping("/reviews/{id}")
+    public ResponseEntity<String> updateReviewbyId(@PathVariable Long id, @RequestBody Reviews Review,@PathVariable Long companyId) {
+        boolean isUpdated = this.rs.updateReview(Review, id, companyId);
         if(isUpdated){
             return new ResponseEntity<>("Review Updated",HttpStatus.OK);
         }
         return new ResponseEntity<>("No Review Id or Company Found",HttpStatus.NOT_FOUND); 
     }
 
-    @GetMapping("/{company}/reviews/{id}")
-    public ResponseEntity<Reviews> getReviewById(@PathVariable Long id,@PathVariable String company) {
-        Reviews review = this.rs.getReviewById(id, company);
+    @GetMapping("/reviews/{id}")
+    public ResponseEntity<Reviews> getReviewById(@PathVariable Long id,@PathVariable Long companyId) {
+        Reviews review = this.rs.getReviewById(id, companyId);
         return new ResponseEntity<>(review,HttpStatus.OK);
     }
 
-    @DeleteMapping("/{company}/reviews/{id}")
-    public ResponseEntity<String> deleteReview(@PathVariable Long id,@PathVariable String company){
-        boolean isDeleted = this.rs.deleteReviewById(id, company);
+    @DeleteMapping("/reviews/{id}")
+    public ResponseEntity<String> deleteReview(@PathVariable Long id,@PathVariable Long companyId){
+        boolean isDeleted = this.rs.deleteReviewById(id, companyId);
         if(isDeleted){
             return new ResponseEntity<>("Review Deleted",HttpStatus.OK);
         }
