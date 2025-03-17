@@ -3,7 +3,6 @@ package com.kobalt.kobalt.companies;
 import java.util.ArrayList;
 import java.util.List;
 import com.kobalt.kobalt.reviews.Reviews;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kobalt.kobalt.job.Job;
 
 import jakarta.persistence.Entity;
